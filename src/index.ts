@@ -56,7 +56,7 @@ const app = express();
 app.use(cors())
 
 app.get('/ping', (req, res) => {
-    res.send(200)
+    res.sendStatus(200)
 })
 
 app.listen(3000, () => {
