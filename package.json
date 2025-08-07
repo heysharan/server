@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx tsc -b",
-    "build": "pnpm run dev && node dist/index.js"
+    "build": "npx tsc -b",
+    "dev": "pnpm run dev && node dist/index.js"
   },
   "keywords": [],
   "author": "",
