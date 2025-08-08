@@ -53,12 +53,37 @@ import cors from 'cors'
 
 const app = express();
 
+app.use(express.json())
 app.use(cors())
 
 app.get('/ping', (req, res) => {
     res.sendStatus(200)
 })
 
+app.get('/download', (req, res) => {
+  const sizeInMB = 10; // default 10 MB
+  const sizeInBytes = sizeInMB * 1024 * 1024;;
+
+  const chunk = Buffer.alloc(1024 * 1024, '1'); // 1MB buffer
+  let sent = 0;
+
+  const send = () => {
+    if (sent >= sizeInBytes) {
+      return res.end();
+    }
+
+    res.write(chunk, () => {
+      sent += chunk.length;
+      setImmediate(send);
+    });
+  };
+
+  send();
+});
+
+
 app.listen(3003, () => {
     console.log("Server running on PORT 3003")
 })
+
+
