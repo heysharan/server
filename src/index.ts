@@ -81,6 +81,18 @@ app.get('/download', (req, res) => {
   send();
 });
 
+app.post('/upload', (req, res) => {
+  let totalBytes = 0;
+
+  req.on('data', chunk => {
+    totalBytes += chunk.length;
+  });
+
+  req.on('end', () => {
+    res.json({ received: totalBytes });
+  });
+});
+
 
 app.listen(3003, () => {
     console.log("Server running on PORT 3003")
